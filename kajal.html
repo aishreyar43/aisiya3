@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SIYA - Advanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            --user-gradient: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+            --ai-gradient: linear-gradient(135deg, #c471f5 0%, #fa71cd 100%);
+            --dark-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--dark-bg);
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .title-text {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #f3ec78, #af4261, #00dbde);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleEntrance 1.5s ease-out forwards, subtitleGlow 3s infinite 2s;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1s;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(transparent, #ffffff);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 0);
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 0);
+            animation: rotate 1.5s linear infinite;
+            margin-top: 2rem;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes titleEntrance {
+            0% { opacity: 0; transform: translateY(-50px) scale(0.8); }
+            70% { transform: translateY(10px) scale(1.1); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes subtitleGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        #chat-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-window {
+            flex: 1;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            padding: 1.5rem;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 1rem 1.25rem;
+            border-radius: 1.25rem;
+            position: relative;
+            animation: messageIn 0.3s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            line-height: 1.6;
+        }
+
+        @keyframes messageIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--user-gradient);
+            color: white;
+            border-bottom-right-radius: 0.5rem;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: var(--ai-gradient);
+            color: white;
+            border-bottom-left-radius: 0.5rem;
+        }
+
+        .message-typing {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        #input-section {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 0.75rem;
+            position: relative;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 0.75rem 1.25rem;
+            border-radius: 2rem;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        #user-input:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+            background: white;
+        }
+
+        #send-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #send-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        #send-button:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--dark-bg);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -280px;
+            padding: 1.5rem;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #f3ec78, #af4261);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-button {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .sidebar-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .sidebar-button i {
+            font-size: 1rem;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #sidebar-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #sidebar-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .message-actions {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            display: none;
+            gap: 0.25rem;
+        }
+
+        .message:hover .message-actions {
+            display: flex;
+        }
+
+        .message-action {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .message-action:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: scale(1.1);
+        }
+
+        .suggestions {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .suggestions::-webkit-scrollbar {
+            display: none;
+        }
+
+        .suggestion {
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            background: #e2e8f0;
+            color: #475569;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .suggestion:hover {
+            background: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .message {
+                max-width: 90%;
+            }
+            
+            .sidebar {
+                width: 85%;
+                left: -85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <h1 class="title-text">AI SIYA</h1>
+            <p class="subtitle">Your intelligent AI assistant</p>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">AI SIYA</div>
+            <button class="sidebar-close" id="sidebar-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-nav">
+            <button class="sidebar-button" id="new-chat-button">
+                <i class="fas fa-plus"></i> New Chat
+            </button>
+            <button class="sidebar-button" id="history-button">
+                <i class="fas fa-history"></i> History
+            </button>
+            <button class="sidebar-button" id="get-app-button">
+                <i class="fas fa-mobile-alt"></i> Get App
+            </button>
+            <button class="sidebar-button" id="home-button">
+                <i class="fas fa-home"></i> Home
+            </button>
+            <button class="sidebar-button" id="settings-button">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+        <div class="sidebar-footer">
+            <p>Version 2.0.0</p>
+            <p>© 2025 AI SIYA. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Overlay for closing sidebar -->
+    <div class="overlay"></div>
+
+    <!-- Main Chat Section -->
+    <div id="chat-container">
+        <!-- Chat Window -->
+        <div id="chat-window">
+            <!-- Messages will be appended here -->
+        </div>
+
+        <!-- Quick Suggestions -->
+        <div class="suggestions px-4">
+            <div class="suggestion">What can you do?</div>
+            <div class="suggestion">Tell me a joke</div>
+            <div class="suggestion">Help with coding</div>
+            <div class="suggestion">Explain AI</div>
+        </div>
+
+        <!-- Input Section -->
+        <div id="input-section">
+            <input id="user-input" type="text" placeholder="Message AI SIYA...">
+            <button id="send-button">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        <script src="mail.js"></script>
+    </div>
+</body>
+</html>
