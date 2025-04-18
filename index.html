@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SIYA - Advanced Artificial Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+      :root {
+        --primary: #6366f1;
+        --secondary: #8b5cf6;
+        --accent: #ec4899;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0f172a;
+        color: #e2e8f0;
+      }
+      .gradient-text {
+        background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+      .glow {
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+      }
+      .glow:hover {
+        box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+      }
+      .ai-card {
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .terminal {
+        background: #0a0e17;
+        border: 1px solid #1e293b;
+        font-family: 'Courier New', monospace;
+      }
+      .command {
+        color: #4ade80;
+      }
+      .cursor {
+        animation: blink 1s infinite;
+      }
+      /* Mobile view */
+      @media only screen and (max-width: 768px) {
+      .menu {
+          display: none;
+      }
+      .hamburger {
+         display: block;
+      }
+      }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <!-- Navbar -->
+  <nav class="backdrop-blur-md bg-slate-900/50 border-b border-slate-800/50 fixed w-full z-50 animate__animated animate__fadeInDown">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center">
+        <div class="relative">
+          <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-75"></div>
+          <img class="h-12 w-12 rounded-full relative animate__animated animate__bounceIn" 
+            src="https://i.imgur.com/wN6RirI.png" alt="NEXUS AI Logo"/>
+        </div>
+        <span class="ml-3 text-2xl font-extrabold gradient-text">AI SIYA</span>
+      </div>
+      <div class="hidden md:flex space-x-8 items-center">
+        <a class="text-slate-300 hover:text-white transition-all duration-300 hover:glow px-3 py-1 rounded-lg" href="login.html">Login</a>
+        <a class="text-slate-300 hover:text-white transition-all duration-300 hover:glow px-3 py-1 rounded-lg" href="ContactUs.html">Contact</a>
+        <button onclick="window.location.href='chat.html'" 
+          class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full font-bold shadow-lg hover:scale-105 transition duration-300 ml-4">
+          Launch Console
+        </button>
+      </div>
+      <button class="md:hidden text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 relative z-10 animate__animated animate__fadeIn">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-12 md:mb-0">
+        <div class="text-sm font-mono text-primary mb-4 animate__animated animate__fadeIn">> NEXT-GEN AI PLATFORM</div>
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+          <span class="gradient-text">Cognitive Computing</span><br>
+          <span class="text-white">Reinvented</span>
+        </h1>
+        <p class="text-lg text-slate-300 mb-8 max-w-lg">
+            AI SIYA delivers unprecedented artificial intelligence capabilities with multi-modal understanding, real-time learning, and human-like reasoning.
+        </p>
+        <div class="flex flex-wrap gap-4">
+            <button onclick="window.location.href='kajal.html'" 
+            class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition duration-300 flex items-center">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+            
+            Get Start 
+          </button>
+          
+
+        </div>
+        <div class="mt-12 flex items-center space-x-6">
+          <div class="flex -space-x-2">
+            <img class="w-10 h-10 rounded-full border-2 border-slate-800" src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+            <img class="w-10 h-10 rounded-full border-2 border-slate-800" src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+            <img class="w-10 h-10 rounded-full border-2 border-slate-800" src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+          </div>
+          <div class="text-sm text-slate-400">
+            Trusted by <span class="text-white font-medium">8500+</span> developers worldwide
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2 relative">
+        <div class="ai-card rounded-2xl p-1 glow">
+          <div class="terminal rounded-xl p-6 h-96 overflow-hidden">
+            <div class="flex items-center mb-4">
+              <div class="flex space-x-2 mr-4">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div class="text-sm text-slate-500">SIYA AI-console</div>
+            </div>
+            <div class="space-y-4 font-mono text-sm">
+              <div class="flex">
+                <span class="text-primary mr-2">$</span>
+                <span class="command">initiate SIYA AI --mode=advanced</span>
+              </div>
+              <div>> Initializing AI SIYA core v4.2.1...</div>
+              <div>> Loading neural modules: 100%</div>
+              <div>> Establishing quantum link...</div>
+              <div class="flex">
+                <span class="text-primary mr-2">$</span>
+                <span class="command">query --type=complex "Explain quantum machine learning"</span>
+              </div>
+              <div>> Processing request with 8.2B parameter model...</div>
+              <div>> Quantum machine learning combines...</div>
+              <div class="blinking-cursor flex">
+                <span class="text-primary mr-2">$</span>
+                <span class="flex-1 relative">
+                  <span class="absolute left-0 top-0 command">_</span>
+                  <span class="cursor">|</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-purple-600 rounded-full filter blur-3xl opacity-20"></div>
+        <div class="absolute -top-6 -right-6 w-32 h-32 bg-pink-600 rounded-full filter blur-3xl opacity-20"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 relative z-10">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <div class="text-sm font-mono text-primary mb-2">CORE CAPABILITIES</div>
+        <h2 class="text-4xl font-bold text-white mb-4">Advanced AI Architecture</h2>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto">AI SIYA incorporates cutting-edge technologies to deliver unparalleled performance</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="ai-card rounded-xl p-8 transition-all hover:-translate-y-2">
+          <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Quantum Neural Nets</h3>
+          <p class="text-slate-400">Our proprietary QNN architecture enables exponential learning capabilities beyond classical models.</p>
+        </div>
+        <div class="ai-card rounded-xl p-8 transition-all hover:-translate-y-2">
+          <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Real-Time Adaptation</h3>
+          <p class="text-slate-400">Continuous learning loop allows the system to evolve with each interaction in real-time.</p>
+        </div>
+        <div class="ai-card rounded-xl p-8 transition-all hover:-translate-y-2">
+          <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Multi-Modal Security</h3>
+          <p class="text-slate-400">Advanced encryption and biometric verification ensure complete privacy and security.</p>
+        </div>
+        <div class="ai-card rounded-xl p-8 transition-all hover:-translate-y-2">
+          <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Cloud Hybrid</h3>
+          <p class="text-slate-400">Distributed computing across quantum and classical nodes for optimal performance.</p>
+        </div>
+        <div class="ai-card rounded-xl p-8 transition-all hover:-translate-y-2">
+          <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Cognitive API</h3>
+          <p class="text-slate-400">Seamless integration with our cognitive computing API for enterprise solutions.</p>
+        </div>
+        <div class="ai-card rounded-xl p-8 transition-all hover:-translate-y-2">
+          <div class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Dynamic Scaling</h3>
+          <p class="text-slate-400">Automatically scales compute resources based on workload complexity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Demo Section -->
+  <section id="demo" class="py-20 bg-gradient-to-br from-slate-900/50 to-slate-800/30 relative overflow-hidden">
+    <div class="absolute -top-1/2 -right-1/4 w-full h-full bg-primary rounded-full filter blur-[200px] opacity-10"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-12 md:mb-0">
+          <div class="text-sm font-mono text-primary mb-2">INTERACTIVE DEMO</div>
+          <h2 class="text-4xl font-bold text-white mb-6">Experience AI SIYA</h2>
+          <p class="text-lg text-slate-400 mb-8 max-w-lg">
+            Try our live demo to see how AI SIYA can transform your workflows with advanced cognitive capabilities.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="w-3 h-3 rounded-full bg-primary"></div>
+              </div>
+              <div class="ml-3">
+                <p class="text-white font-medium">Natural Language Understanding</p>
+                <p class="text-slate-400 text-sm">Process complex queries with human-like comprehension</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="w-3 h-3 rounded-full bg-primary"></div>
+              </div>
+              <div class="ml-3">
+                <p class="text-white font-medium">Contextual Memory</p>
+                <p class="text-slate-400 text-sm">Maintains context across multi-turn conversations</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="w-3 h-3 rounded-full bg-primary"></div>
+              </div>
+              <div class="ml-3">
+                <p class="text-white font-medium">Multi-Modal Processing</p>
+                <p class="text-slate-400 text-sm">Understands text, images, and data simultaneously</p>
+              </div>
+            </div>
+          </div>
+          <button class="mt-8 bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition duration-300">
+            Launch Demo Console
+          </button>
+        </div>
+        <div class="md:w-1/2 relative">
+          <div class="ai-card rounded-2xl p-1 glow max-w-lg mx-auto">
+            <div class="bg-slate-900 rounded-xl p-6 h-96 overflow-hidden relative">
+              <div class="flex items-center mb-4">
+                <div class="flex space-x-2 mr-4">
+                  <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <div class="text-sm text-slate-500">AI-demo</div>
+              </div>
+              <div class="font-mono text-sm h-80 overflow-y-auto">
+                <div class="text-slate-400 mb-4">> Welcome to AI SIYA interactive demo</div>
+                <div class="text-slate-400 mb-4">> Type your query below to experience advanced AI capabilities</div>
+                
+                <div class="mb-4 flex">
+                  <span class="text-primary mr-2">$</span>
+                  <span class="text-white">What's the weather today?</span>
+                </div>
+                <div class="mb-6 text-slate-300 pl-6 border-l-2 border-slate-700">
+                  <div>> Checking local weather data...</div>
+                  <div>> Current conditions: Sunny, 72°F</div>
+                  <div>> Forecast: Clear skies throughout the day</div>
+                </div>
+                
+                <div class="mb-4 flex">
+                  <span class="text-primary mr-2">$</span>
+                  <span class="text-white">Explain quantum entanglement simply</span>
+                </div>
+                <div class="mb-6 text-slate-300 pl-6 border-l-2 border-slate-700">
+                  <div>> Quantum entanglement is when two particles...</div>
+                </div>
+                
+                <div class="flex">
+                  <span class="text-primary mr-2">$</span>
+                  <span class="flex-1 relative">
+                    <input type="text" class="bg-transparent border-none outline-none w-full text-white" placeholder="Ask NEXUS anything...">
+                    <span class="cursor absolute right-0">|</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 relative z-10">
+    <div class="container mx-auto px-4">
+      <div class="ai-card rounded-xl p-8 md:p-12">
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+          <div class="p-4">
+            <div class="text-4xl font-bold text-white mb-2">4.2B+</div>
+            <div class="text-sm text-slate-400">Parameters</div>
+          </div>
+          <div class="p-4">
+            <div class="text-4xl font-bold text-white mb-2">127ms</div>
+            <div class="text-sm text-slate-400">Avg Response Time</div>
+          </div>
+          <div class="p-4">
+            <div class="text-4xl font-bold text-white mb-2">98.7%</div>
+            <div class="text-sm text-slate-400">Accuracy</div>
+          </div>
+          <div class="p-4">
+            <div class="text-4xl font-bold text-white mb-2">24/7</div>
+            <div class="text-sm text-slate-400">Uptime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 relative overflow-hidden">
+    <div class="absolute -top-1/2 -left-1/4 w-full h-full bg-primary rounded-full filter blur-[200px] opacity-10"></div>
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <div class="ai-card rounded-xl p-12 max-w-4xl mx-auto">
+        <div class="text-sm font-mono text-primary mb-2">READY TO TRANSFORM?</div>
+        <h2 class="text-4xl font-bold text-white mb-6">Deploy NEXUS AI in Your Organization</h2>
+        <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
+          Join thousands of enterprises leveraging our advanced AI platform to revolutionize their operations.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <button class="bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition duration-300">
+            Request Enterprise Demo
+          </button>
+          <button class="bg-slate-800/50 text-white px-6 py-3 rounded-full font-bold border border-slate-700 hover:bg-slate-700/50 transition duration-300">
+            Developer Documentation
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="pt-20 pb-10 border-t border-slate-800/50 relative z-10">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div>
+          <div class="flex items-center mb-4">
+            <img class="h-10 w-10 rounded-full mr-3" src="https://i.imgur.com/wN6RirI.png" alt="NEXUS AI Logo"/>
+            <span class="text-xl font-bold gradient-text">NEXUS AI</span>
+          </div>
+          <p class="text-slate-400 text-sm">
+            Advanced artificial intelligence platform for the next generation of cognitive computing.
+          </p>
+          <div class="flex space-x-4 mt-6">
+            <a href="#" class="text-slate-400 hover:text-white transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+              </svg>
+            </a>
+            <a href="#" class="text-slate-400 hover:text-white transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z" />
+              </svg>
+            </a>
+            <a href="#" class="text-slate-400 hover:text-white transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Product</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Features</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Pricing</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">API</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Integrations</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Resources</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Documentation</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Guides</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Blog</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Research</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-slate-400 hover:text-white transition">About</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Careers</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Privacy</a></li>
+            <li><a href="#" class="text-slate-400 hover:text-white transition">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-slate-800/50 text-center">
+        <p class="text-sm text-slate-500">© 2025 AI SIYA. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Login Modal -->
+  <div id="modal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm flex justify-center items-center z-50 hidden">
+    <div class="ai-card rounded-xl p-8 w-full max-w-md relative mx-4">
+      <button id="close-modal" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 
+          
